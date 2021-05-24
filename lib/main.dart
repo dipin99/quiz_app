@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import './quiz.dart';
 import './result.dart';
+
 void main() {
   runApp(MyApp());
 }
@@ -17,19 +18,38 @@ class _MyAppState extends State<MyApp> {
   final _questions = const [
     {
       'questext': 'What is your fav color?',
-      'answers': ['black', 'red', 'Green', 'White']
+      'answers': [
+        {'text': 'black', 'score': 10},
+        {'text': 'red', 'score': 5},
+        {'text': 'Green', 'score': 3},
+        {'text': 'white', 'score': 1}
+      ]
     },
     {
       'questext': 'What is your fav animal',
-      'answers': ['Rabbit', 'Snake', 'Elephant', 'Lion']
+      'answers': [
+        {'text': 'Rabbit', 'score': 10},
+        {'text': 'Snake', 'score': 5},
+        {'text': 'Elephant', 'score': 1},
+        {'text': 'Lion', 'score': 20}
+      ]
     },
     {
       'questext': 'Who is your fav Instructor',
-      'answers': ['ABC', 'YXZ', 'PQR', 'CBD']
+      'answers': [
+        {'text': 'ABC', 'score': 10},
+        {'text': 'XYZ', 'score': 5},
+        {'text': 'PQR', 'score': 1},
+        {'text': 'CBD', 'score': 20}
+      ]
     },
   ];
   var _quesIndex = 0;
-  void _answerQuestion() {
+  var _totalScore = 0;
+  void _answerQuestion(int score) {
+
+    _totalScore += score;
+
     setState(() {
       _quesIndex += 1;
     });
@@ -55,7 +75,7 @@ class _MyAppState extends State<MyApp> {
                 quesIndex: _quesIndex,
                 questions: _questions,
               )
-            : Result(),
+            : Result(_totalScore),
       ),
     );
   }
